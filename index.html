@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator - Online Free Tools - Rakib Alom</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 25%, #0d0d1a 50%, #1f1f4a 75%, #0a0a15 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .glass-input:focus {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+        }
+
+        .glass-button {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.8), rgba(59, 130, 246, 0.8));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .glass-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.4);
+        }
+
+        .type-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .type-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .type-btn.active {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(59, 130, 246, 0.3));
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+        }
+
+        .qr-container {
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+        }
+
+        #qrcode img {
+            margin: 0 auto;
+        }
+
+        .glow {
+            box-shadow: 0 0 60px rgba(139, 92, 246, 0.15);
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.5);
+            border-radius: 4px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .category-title {
+            background: linear-gradient(90deg, rgba(139, 92, 246, 0.3), transparent);
+            border-left: 3px solid #8b5cf6;
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <nav class="glass sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="https://rakibalom.com" class="flex items-center space-x-2 group">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center font-bold text-lg group-hover:scale-110 transition-transform">
+                            QR
+                        </div>
+                        <span class="font-semibold text-lg hidden sm:block">QR Code Generator</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="https://rakibalom.com" class="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all flex items-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                        <span>Home</span>
+                    </a>
+                    <a href="https://rakibalom.com/tools/" class="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all flex items-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        <span>Tools</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-1 py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-10 fade-in">
+                <h1 class="text-4xl sm:text-5xl font-bold mb-4">
+                    <span class="gradient-text">QR Code Generator</span>
+                </h1>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Create professional QR codes for URLs, Wi-Fi, contacts, payments, and more. Free, fast, and beautiful.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Left Panel - QR Types -->
+                <div class="lg:col-span-1 space-y-4 fade-in">
+                    <div class="glass rounded-2xl p-6 glow">
+                        <h3 class="font-semibold text-lg mb-4 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                            </svg>
+                            Select QR Type
+                        </h3>
+
+                        <!-- Core Types -->
+                        <div class="mb-4">
+                            <div class="category-title px-3 py-1 rounded-r mb-2">
+                                <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Core Types</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button onclick="selectType('url')" class="type-btn active px-3 py-2 rounded-lg text-sm font-medium flex items-center justify-center space-x-1" data-type="url">
+                                    <span>🔗</span><span>URL</span>
+                                </button>
+                                <button onclick="selectType('text')" class="type-btn px-3 py-2 rounded-lg text-sm font-medium flex items-center justify-center space-x-1" data-type="text">
+                                    <span>📝</span><span>Text</span>
+                                </button>
+                                <button onclick="selectType('wifi')" class="type-btn px-3 py-2 rounded-lg text-sm font-medium flex items-center justify-center space-x-1" data-type="wifi">
+                                    <span>📶</span><span>Wi-Fi</span>
+                                </button>
+                                <button onclick="selectType('email')" class="type-btn px-3 py-2 rounded-lg text-sm font-medium flex items-center justify-center space-x-1" data-type="email">
+                                    <span>📧</span><span>Email</span>
+                                </button>
+                                <button onclick="selectType('phone')" class="type-btn px-3 py-2 rounded-lg text-sm font-medium flex items-center justify-center space-x-1" data-type="phone">
+                                    <span>📞</span><span>Phone</span>
+                                </button>
+                                <button onclick="selectType('sms')" class="type-btn px-3 py-2 rounded-lg text-sm font-medium flex items-center justify-center space-x-1" data-type="sms">
+                                    <span>💬</span><span>SMS</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Business Types -->
+                        <div class="mb-4">
+                            <div class="category-title px-3 py-1 rounded-r mb-2">
+                                <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Business & Contact</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button onclick="selectType('vcard')" class="type-btn px-3 py-2 rounded-lg text-sm font-medium flex items-center justify-center space-x-1" data-type="vcard">
+                                    <span>👤</span><span>vCard</span>
+                                </button>
+                                <button onclick="selectType('location')" class="type-btn px-3 py-2 rounded-lg text-sm font-medium flex items-center justify-center space-x-1" data-type="location">
+                                    <span>📍</span><span>Location</span>
+                                </button>
+                                <button onclick="selectType('event')" class="type-btn px-3 py-2 rounded-lg text-sm font-medium flex items-center justify-center space-x-1 col-span-2" data-type="event">
+                                    <span>📅</span><span>Event</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Social Types -->
+                        <div class="mb-4">
+                            <div class="category-title px-3 py-1 rounded-r mb-2">
+                                <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Media & Social</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button onclick="selectType('social')" class="type-btn px-3 py-2 rounded-lg text-sm font-medium flex items-center justify-center space-x-1" data-type="social">
+                                    <span>🌐</span><span>Social</span>
+                                </button>
+                                <button onclick="selectType('appstore')" class="type-btn px-3 py-2 rounded-lg text-sm font-medium flex items-center justify-center space-x-1" data-type="appstore">
+                                    <span>📱</span><span>App Store</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Advanced Types -->
+                        <div>
+                            <div class="category-title px-3 py-1 rounded-r mb-2">
+                                <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Advanced</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button onclick="selectType('dynamic')" class="type-btn px-3 py-2 rounded-lg text-sm font-medium flex items-center justify-center space-x-1" data-type="dynamic">
+                                    <span>🔄</span><span>Dynamic</span>
+                                </button>
+                                <button onclick="selectType('payment')" class="type-btn px-3 py-2 rounded-lg text-sm font-medium flex items-center justify-center space-x-1" data-type="payment">
+                                    <span>💳</span><span>Payment</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Middle Panel - Form -->
+                <div class="lg:col-span-1 fade-in">
+                    <div class="glass rounded-2xl p-6 glow">
+                        <h3 class="font-semibold text-lg mb-4 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                            </svg>
+                            <span id="formTitle">URL Details</span>
+                        </h3>
+
+                        <!-- URL Form -->
+                        <div id="form-url" class="form-section">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Website URL</label>
+                                    <input type="url" id="url-input" placeholder="https://example.com" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Text Form -->
+                        <div id="form-text" class="form-section hidden">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Your Text</label>
+                                    <textarea id="text-input" rows="4" placeholder="Enter your text here..." class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none resize-none"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- WiFi Form -->
+                        <div id="form-wifi" class="form-section hidden">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Network Name (SSID)</label>
+                                    <input type="text" id="wifi-ssid" placeholder="My WiFi Network" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Password</label>
+                                    <input type="password" id="wifi-password" placeholder="••••••••" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Security Type</label>
+                                    <select id="wifi-security" class="glass-input w-full px-4 py-3 rounded-xl text-white outline-none">
+                                        <option value="WPA" class="bg-gray-800">WPA/WPA2</option>
+                                        <option value="WEP" class="bg-gray-800">WEP</option>
+                                        <option value="nopass" class="bg-gray-800">None</option>
+                                    </select>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="checkbox" id="wifi-hidden" class="rounded bg-gray-700 border-gray-600">
+                                    <label class="text-sm text-gray-400">Hidden Network</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Email Form -->
+                        <div id="form-email" class="form-section hidden">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Email Address</label>
+                                    <input type="email" id="email-address" placeholder="example@email.com" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Subject</label>
+                                    <input type="text" id="email-subject" placeholder="Email subject" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Message</label>
+                                    <textarea id="email-body" rows="3" placeholder="Your message..." class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none resize-none"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Phone Form -->
+                        <div id="form-phone" class="form-section hidden">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Phone Number</label>
+                                    <input type="tel" id="phone-number" placeholder="+1234567890" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SMS Form -->
+                        <div id="form-sms" class="form-section hidden">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Phone Number</label>
+                                    <input type="tel" id="sms-phone" placeholder="+1234567890" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Message</label>
+                                    <textarea id="sms-message" rows="3" placeholder="Your message..." class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none resize-none"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- vCard Form -->
+                        <div id="form-vcard" class="form-section hidden">
+                            <div class="space-y-4">
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-2">First Name</label>
+                                        <input type="text" id="vcard-firstname" placeholder="John" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-2">Last Name</label>
+                                        <input type="text" id="vcard-lastname" placeholder="Doe" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Organization</label>
+                                    <input type="text" id="vcard-org" placeholder="Company Name" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Phone</label>
+                                    <input type="tel" id="vcard-phone" placeholder="+1234567890" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Email</label>
+                                    <input type="email" id="vcard-email" placeholder="john@example.com" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Website</label>
+                                    <input type="url" id="vcard-website" placeholder="https://example.com" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Address</label>
+                                    <input type="text" id="vcard-address" placeholder="123 Street, City" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Location Form -->
+                        <div id="form-location" class="form-section hidden">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Latitude</label>
+                                    <input type="text" id="location-lat" placeholder="40.7128" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Longitude</label>
+                                    <input type="text" id="location-lng" placeholder="-74.0060" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                                <p class="text-xs text-gray-500">Or use address search below</p>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Address</label>
+                                    <input type="text" id="location-address" placeholder="New York, NY, USA" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Event Form -->
+                        <div id="form-event" class="form-section hidden">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Event Title</label>
+                                    <input type="text" id="event-title" placeholder="Meeting" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-2">Start Date & Time</label>
+                                        <input type="datetime-local" id="event-start" class="glass-input w-full px-4 py-3 rounded-xl text-white outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-2">End Date & Time</label>
+                                        <input type="datetime-local" id="event-end" class="glass-input w-full px-4 py-3 rounded-xl text-white outline-none">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Location</label>
+                                    <input type="text" id="event-location" placeholder="Conference Room A" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Description</label>
+                                    <textarea id="event-description" rows="2" placeholder="Event details..." class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none resize-none"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Form -->
+                        <div id="form-social" class="form-section hidden">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Social Platform</label>
+                                    <select id="social-platform" class="glass-input w-full px-4 py-3 rounded-xl text-white outline-none">
+                                        <option value="facebook" class="bg-gray-800">Facebook</option>
+                                        <option value="instagram" class="bg-gray-800">Instagram</option>
+                                        <option value="twitter" class="bg-gray-800">Twitter/X</option>
+                                        <option value="linkedin" class="bg-gray-800">LinkedIn</option>
+                                        <option value="youtube" class="bg-gray-800">YouTube</option>
+                                        <option value="tiktok" class="bg-gray-800">TikTok</option>
+                                        <option value="snapchat" class="bg-gray-800">Snapchat</option>
+                                        <option value="github" class="bg-gray-800">GitHub</option>
+                                        <option value="custom" class="bg-gray-800">Custom URL</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Username or Profile URL</label>
+                                    <input type="text" id="social-username" placeholder="@username or full URL" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- App Store Form -->
+                        <div id="form-appstore" class="form-section hidden">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Store Type</label>
+                                    <select id="appstore-type" class="glass-input w-full px-4 py-3 rounded-xl text-white outline-none">
+                                        <option value="playstore" class="bg-gray-800">Google Play Store</option>
+                                        <option value="appstore" class="bg-gray-800">Apple App Store</option>
+                                        <option value="both" class="bg-gray-800">Universal Link</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">App URL or ID</label>
+                                    <input type="text" id="appstore-url" placeholder="App store link or package ID" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dynamic Form -->
+                        <div id="form-dynamic" class="form-section hidden">
+                            <div class="space-y-4">
+                                <div class="glass-dark rounded-xl p-4 border border-violet-500/20">
+                                    <div class="flex items-center space-x-2 mb-2">
+                                        <span class="text-violet-400">✨</span>
+                                        <span class="font-medium text-violet-300">Dynamic QR Code</span>
+                                    </div>
+                                    <p class="text-sm text-gray-400">Dynamic QR codes use a redirect service. Enter your destination URL below.</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Short Code/Name</label>
+                                    <input type="text" id="dynamic-name" placeholder="my-link" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Destination URL</label>
+                                    <input type="url" id="dynamic-url" placeholder="https://example.com" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Form -->
+                        <div id="form-payment" class="form-section hidden">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Payment Type</label>
+                                    <select id="payment-type" class="glass-input w-full px-4 py-3 rounded-xl text-white outline-none" onchange="updatePaymentFields()">
+                                        <option value="upi" class="bg-gray-800">UPI (India)</option>
+                                        <option value="paypal" class="bg-gray-800">PayPal</option>
+                                        <option value="bitcoin" class="bg-gray-800">Bitcoin</option>
+                                        <option value="ethereum" class="bg-gray-800">Ethereum</option>
+                                        <option value="bank" class="bg-gray-800">Bank Transfer</option>
+                                    </select>
+                                </div>
+                                <div id="payment-fields-upi">
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm text-gray-400 mb-2">UPI ID</label>
+                                            <input type="text" id="payment-upi-id" placeholder="name@bank" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm text-gray-400 mb-2">Payee Name</label>
+                                            <input type="text" id="payment-upi-name" placeholder="Your Name" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm text-gray-400 mb-2">Amount (Optional)</label>
+                                            <input type="number" id="payment-upi-amount" placeholder="100" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="payment-fields-crypto" class="hidden">
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-2">Wallet Address</label>
+                                        <input type="text" id="payment-crypto-address" placeholder="Wallet address" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                    </div>
+                                </div>
+                                <div id="payment-fields-paypal" class="hidden">
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-2">PayPal.me Link or Email</label>
+                                        <input type="text" id="payment-paypal" placeholder="paypal.me/username" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                    </div>
+                                </div>
+                                <div id="payment-fields-bank" class="hidden">
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm text-gray-400 mb-2">Bank Name</label>
+                                            <input type="text" id="payment-bank-name" placeholder="Bank Name" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm text-gray-400 mb-2">Account Number</label>
+                                            <input type="text" id="payment-bank-account" placeholder="Account Number" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm text-gray-400 mb-2">Routing/IFSC Code</label>
+                                            <input type="text" id="payment-bank-routing" placeholder="Routing Code" class="glass-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 outline-none">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Generate Button -->
+                        <button onclick="generateQR()" class="glass-button w-full mt-6 py-3 rounded-xl font-semibold text-white flex items-center justify-center space-x-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+                            </svg>
+                            <span>Generate QR Code</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Panel - QR Preview -->
+                <div class="lg:col-span-1 fade-in">
+                    <div class="glass rounded-2xl p-6 glow sticky top-24">
+                        <h3 class="font-semibold text-lg mb-4 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                            QR Code Preview
+                        </h3>
+
+                        <div class="flex flex-col items-center">
+                            <!-- QR Code Display -->
+                            <div class="qr-container mb-6 floating" id="qr-wrapper">
+                                <div id="qrcode" class="flex items-center justify-center" style="min-width: 200px; min-height: 200px;">
+                                    <div class="text-center text-gray-400">
+                                        <svg class="w-16 h-16 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+                                        </svg>
+                                        <p class="text-sm">Your QR code will appear here</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- QR Options -->
+                            <div class="w-full space-y-4">
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">QR Code Size</label>
+                                    <input type="range" id="qr-size" min="150" max="350" value="200" class="w-full accent-violet-500" onchange="updateQRSize()">
+                                    <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                        <span>Small</span>
+                                        <span id="size-value">200px</span>
+                                        <span>Large</span>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-2">Foreground</label>
+                                        <div class="flex items-center space-x-2">
+                                            <input type="color" id="qr-fg-color" value="#000000" class="w-10 h-10 rounded-lg cursor-pointer border-0">
+                                            <span class="text-sm text-gray-400" id="fg-hex">#000000</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-2">Background</label>
+                                        <div class="flex items-center space-x-2">
+                                            <input type="color" id="qr-bg-color" value="#ffffff" class="w-10 h-10 rounded-lg cursor-pointer border-0">
+                                            <span class="text-sm text-gray-400" id="bg-hex">#ffffff</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Download Buttons -->
+                                <div class="grid grid-cols-2 gap-3 pt-4">
+                                    <button onclick="downloadQR('png')" class="glass-button py-2 rounded-xl font-medium text-sm flex items-center justify-center space-x-1">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                        </svg>
+                                        <span>PNG</span>
+                                    </button>
+                                    <button onclick="downloadQR('svg')" class="type-btn py-2 rounded-xl font-medium text-sm flex items-center justify-center space-x-1">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                        </svg>
+                                        <span>SVG</span>
+                                    </button>
+                                </div>
+
+                                <button onclick="copyQRToClipboard()" class="type-btn w-full py-2 rounded-xl font-medium text-sm flex items-center justify-center space-x-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                                    </svg>
+                                    <span>Copy to Clipboard</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-8 right-8 glass-dark px-6 py-3 rounded-xl transform translate-x-full opacity-0 transition-all duration-300 z-50 flex items-center space-x-2">
+        <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+        </svg>
+        <span id="toast-message">Success!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="glass mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center font-bold text-sm">
+                        R
+                    </div>
+                    <span class="text-gray-400">Developed by <a href="https://rakibalom.com" class="text-violet-400 hover:text-violet-300 transition-colors font-medium">Rakib Alom</a></span>
+                </div>
+                <div class="flex items-center space-x-6 text-sm text-gray-500">
+                    <span>© 2026 All rights reserved</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let qrcode = null;
+        let currentType = 'url';
+        let qrData = '';
+
+        const formTitles = {
+            url: 'URL Details',
+            text: 'Text Details',
+            wifi: 'Wi-Fi Details',
+            email: 'Email Details',
+            phone: 'Phone Details',
+            sms: 'SMS Details',
+            vcard: 'Contact Details',
+            location: 'Location Details',
+            event: 'Event Details',
+            social: 'Social Media Details',
+            appstore: 'App Store Details',
+            dynamic: 'Dynamic QR Details',
+            payment: 'Payment Details'
+        };
+
+        function selectType(type) {
+            currentType = type;
+            
+            // Update active button
+            document.querySelectorAll('.type-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.type === type) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update form title
+            document.getElementById('formTitle').textContent = formTitles[type];
+
+            // Show/hide forms
+            document.querySelectorAll('.form-section').forEach(form => {
+                form.classList.add('hidden');
+            });
+            document.getElementById(`form-${type}`).classList.remove('hidden');
+        }
+
+        function updatePaymentFields() {
+            const paymentType = document.getElementById('payment-type').value;
+            
+            document.getElementById('payment-fields-upi').classList.add('hidden');
+            document.getElementById('payment-fields-crypto').classList.add('hidden');
+            document.getElementById('payment-fields-paypal').classList.add('hidden');
+            document.getElementById('payment-fields-bank').classList.add('hidden');
+
+            if (paymentType === 'upi') {
+                document.getElementById('payment-fields-upi').classList.remove('hidden');
+            } else if (paymentType === 'bitcoin' || paymentType === 'ethereum') {
+                document.getElementById('payment-fields-crypto').classList.remove('hidden');
+            } else if (paymentType === 'paypal') {
+                document.getElementById('payment-fields-paypal').classList.remove('hidden');
+            } else if (paymentType === 'bank') {
+                document.getElementById('payment-fields-bank').classList.remove('hidden');
+            }
+        }
+
+        function getQRData() {
+            switch (currentType) {
+                case 'url':
+                    return document.getElementById('url-input').value || 'https://rakibalom.com';
+                
+                case 'text':
+                    return document.getElementById('text-input').value || 'Hello World';
+                
+                case 'wifi':
+                    const ssid = document.getElementById('wifi-ssid').value;
+                    const password = document.getElementById('wifi-password').value;
+                    const security = document.getElementById('wifi-security').value;
+                    const hidden = document.getElementById('wifi-hidden').checked ? 'H:true;' : '';
+                    return `WIFI:T:${security};S:${ssid};P:${password};${hidden};`;
+                
+                case 'email':
+                    const email = document.getElementById('email-address').value;
+                    const subject = encodeURIComponent(document.getElementById('email-subject').value);
+                    const body = encodeURIComponent(document.getElementById('email-body').value);
+                    return `mailto:${email}?subject=${subject}&body=${body}`;
+                
+                case 'phone':
+                    return `tel:${document.getElementById('phone-number').value}`;
+                
+                case 'sms':
+                    const smsPhone = document.getElementById('sms-phone').value;
+                    const smsMessage = encodeURIComponent(document.getElementById('sms-message').value);
+                    return `sms:${smsPhone}?body=${smsMessage}`;
+                
+                case 'vcard':
+                    const firstName = document.getElementById('vcard-firstname').value;
+                    const lastName = document.getElementById('vcard-lastname').value;
+                    const org = document.getElementById('vcard-org').value;
+                    const vcardPhone = document.getElementById('vcard-phone').value;
+                    const vcardEmail = document.getElementById('vcard-email').value;
+                    const website = document.getElementById('vcard-website').value;
+                    const address = document.getElementById('vcard-address').value;
+                    return `BEGIN:VCARD\nVERSION:3.0\nN:${lastName};${firstName}\nFN:${firstName} ${lastName}\nORG:${org}\nTEL:${vcardPhone}\nEMAIL:${vcardEmail}\nURL:${website}\nADR:${address}\nEND:VCARD`;
+                
+                case 'location':
+                    const lat = document.getElementById('location-lat').value;
+                    const lng = document.getElementById('location-lng').value;
+                    const locAddress = document.getElementById('location-address').value;
+                    if (lat && lng) {
+                        return `geo:${lat},${lng}`;
+                    }
+                    return `https://maps.google.com/maps?q=${encodeURIComponent(locAddress)}`;
+                
+                case 'event':
+                    const title = document.getElementById('event-title').value;
+                    const start = document.getElementById('event-start').value.replace(/[-:]/g, '').replace('T', 'T');
+                    const end = document.getElementById('event-end').value.replace(/[-:]/g, '').replace('T', 'T');
+                    const eventLoc = document.getElementById('event-location').value;
+                    const desc = document.getElementById('event-description').value;
+                    return `BEGIN:VEVENT\nSUMMARY:${title}\nDTSTART:${start}\nDTEND:${end}\nLOCATION:${eventLoc}\nDESCRIPTION:${desc}\nEND:VEVENT`;
+                
+                case 'social':
+                    const platform = document.getElementById('social-platform').value;
+                    const username = document.getElementById('social-username').value;
+                    const socialUrls = {
+                        facebook: `https://facebook.com/${username}`,
+                        instagram: `https://instagram.com/${username}`,
+                        twitter: `https://twitter.com/${username}`,
+                        linkedin: `https://linkedin.com/in/${username}`,
+                        youtube: `https://youtube.com/@${username}`,
+                        tiktok: `https://tiktok.com/@${username}`,
+                        snapchat: `https://snapchat.com/add/${username}`,
+                        github: `https://github.com/${username}`,
+                        custom: username
+                    };
+                    return username.startsWith('http') ? username : socialUrls[platform];
+                
+                case 'appstore':
+                    const storeType = document.getElementById('appstore-type').value;
+                    const appUrl = document.getElementById('appstore-url').value;
+                    if (appUrl.startsWith('http')) return appUrl;
+                    if (storeType === 'playstore') return `https://play.google.com/store/apps/details?id=${appUrl}`;
+                    if (storeType === 'appstore') return `https://apps.apple.com/app/${appUrl}`;
+                    return appUrl;
+                
+                case 'dynamic':
+                    const dynamicName = document.getElementById('dynamic-name').value;
+                    const dynamicUrl = document.getElementById('dynamic-url').value;
+                    return `https://qr.rakibalom.com/${dynamicName}?url=${encodeURIComponent(dynamicUrl)}`;
+                
+                case 'payment':
+                    const paymentType = document.getElementById('payment-type').value;
+                    if (paymentType === 'upi') {
+                        const upiId = document.getElementById('payment-upi-id').value;
+                        const upiName = document.getElementById('payment-upi-name').value;
+                        const upiAmount = document.getElementById('payment-upi-amount').value;
+                        let upiString = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(upiName)}`;
+                        if (upiAmount) upiString += `&am=${upiAmount}`;
+                        return upiString;
+                    }
+                    if (paymentType === 'bitcoin') {
+                        return `bitcoin:${document.getElementById('payment-crypto-address').value}`;
+                    }
+                    if (paymentType === 'ethereum') {
+                        return `ethereum:${document.getElementById('payment-crypto-address').value}`;
+                    }
+                    if (paymentType === 'paypal') {
+                        const paypal = document.getElementById('payment-paypal').value;
+                        return paypal.startsWith('http') ? paypal : `https://paypal.me/${paypal}`;
+                    }
+                    if (paymentType === 'bank') {
+                        const bankName = document.getElementById('payment-bank-name').value;
+                        const bankAccount = document.getElementById('payment-bank-account').value;
+                        const bankRouting = document.getElementById('payment-bank-routing').value;
+                        return `Bank: ${bankName}\nAccount: ${bankAccount}\nRouting: ${bankRouting}`;
+                    }
+                    return '';
+                
+                default:
+                    return 'https://rakibalom.com';
+            }
+        }
+
+        function generateQR() {
+            qrData = getQRData();
+            
+            if (!qrData) {
+                showToast('Please fill in the required fields');
+                return;
+            }
+
+            const qrContainer = document.getElementById('qrcode');
+            const size = parseInt(document.getElementById('qr-size').value);
+            const fgColor = document.getElementById('qr-fg-color').value;
+            const bgColor = document.getElementById('qr-bg-color').value;
+
+            qrContainer.innerHTML = '';
+
+            qrcode = new QRCode(qrContainer, {
+                text: qrData,
+                width: size,
+                height: size,
+                colorDark: fgColor,
+                colorLight: bgColor,
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            showToast('QR Code generated successfully!');
+        }
+
+        function updateQRSize() {
+            const size = document.getElementById('qr-size').value;
+            document.getElementById('size-value').textContent = `${size}px`;
+            if (qrData) generateQR();
+        }
+
+        // Color input change handlers
+        document.getElementById('qr-fg-color').addEventListener('input', function() {
+            document.getElementById('fg-hex').textContent = this.value;
+            if (qrData) generateQR();
+        });
+
+        document.getElementById('qr-bg-color').addEventListener('input', function() {
+            document.getElementById('bg-hex').textContent = this.value;
+            if (qrData) generateQR();
+        });
+
+        function downloadQR(format) {
+            const qrCanvas = document.querySelector('#qrcode canvas');
+            if (!qrCanvas) {
+                showToast('Please generate a QR code first');
+                return;
+            }
+
+            if (format === 'png') {
+                const link = document.createElement('a');
+                link.download = 'qrcode.png';
+                link.href = qrCanvas.toDataURL('image/png');
+                link.click();
+                showToast('PNG downloaded!');
+            } else if (format === 'svg') {
+                // Convert canvas to SVG (simplified version)
+                const size = qrCanvas.width;
+                const ctx = qrCanvas.getContext('2d');
+                const imageData = ctx.getImageData(0, 0, size, size);
+                
+                let svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">`;
+                svgContent += `<rect width="${size}" height="${size}" fill="${document.getElementById('qr-bg-color').value}"/>`;
+                
+                const moduleSize = size / 25;
+                const fgColor = document.getElementById('qr-fg-color').value;
+                
+                for (let y = 0; y < size; y += moduleSize) {
+                    for (let x = 0; x < size; x += moduleSize) {
+                        const pixelIndex = (Math.floor(y) * size + Math.floor(x)) * 4;
+                        if (imageData.data[pixelIndex] < 128) {
+                            svgContent += `<rect x="${x}" y="${y}" width="${moduleSize}" height="${moduleSize}" fill="${fgColor}"/>`;
+                        }
+                    }
+                }
+                
+                svgContent += '</svg>';
+                
+                const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+                const link = document.createElement('a');
+                link.download = 'qrcode.svg';
+                link.href = URL.createObjectURL(blob);
+                link.click();
+                showToast('SVG downloaded!');
+            }
+        }
+
+        function copyQRToClipboard() {
+            const qrCanvas = document.querySelector('#qrcode canvas');
+            if (!qrCanvas) {
+                showToast('Please generate a QR code first');
+                return;
+            }
+
+            qrCanvas.toBlob(function(blob) {
+                const item = new ClipboardItem({ 'image/png': blob });
+                navigator.clipboard.write([item]).then(function() {
+                    showToast('QR Code copied to clipboard!');
+                }).catch(function() {
+                    showToast('Failed to copy. Try downloading instead.');
+                });
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            toastMessage.textContent = message;
+            
+            toast.classList.remove('translate-x-full', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-x-full', 'opacity-0');
+            }, 3000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listener for type buttons
+            document.querySelectorAll('.type-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const type = this.querySelector('span:last-child').textContent.toLowerCase().replace(' ', '');
+                });
+            });
+
+            // Set proper data-type attributes
+            document.querySelectorAll('.type-btn').forEach(btn => {
+                const onclick = btn.getAttribute('onclick');
+                if (onclick) {
+                    const match = onclick.match(/selectType\('(\w+)'\)/);
+                    if (match) {
+                        btn.dataset.type = match[1];
+                    }
+                }
+            });
+        });
+
+        // Add enter key support for inputs
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+                generateQR();
+            }
+        });
+    </script>
+</body>
+</html>
