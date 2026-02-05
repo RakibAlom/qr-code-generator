@@ -7,7 +7,7 @@
     <!-- Primary SEO Meta Tags -->
     <title>Free QR Code Generator | Create Custom QR Codes Online | Rakib Alom</title>
     <meta name="description" content="Create free custom QR codes online with our professional QR code generator. Generate QR codes for URLs, WiFi, vCard, payments, social media & more. No registration required.">
-    <meta name="keywords" content="QR code generator, free QR code maker, custom QR codes, online QR code creator, QR code for URL, WiFi QR code, vCard QR code, payment QR code, digital business card, QR code scanner, dynamic QR codes, static QR codes, bulk QR code generator">
+    <meta name="keywords" content="QR code generator, free QR code maker, custom QR codes, online QR code creator, QR code for URL, WiFi QR code, vCard QR code, payment QR code, digital business card, QR code scanner, dynamic QR codes, static QR codes, bulk QR code generator, high resolution QR code, QR code with logo, QR code marketing, QR code payments, QR code statistics 2026">
     <meta name="author" content="Rakib Alom">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://rakibalom.com/tools/qr-code-generator">
@@ -203,25 +203,32 @@
 
         .qr-container {
             background: white;
-            padding: 16px;
+            padding: 20px;
             border-radius: 12px;
+            width: 100%;
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #qrcode {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         #qrcode img {
-            margin: 0 auto;
+            max-width: 100%;
+            max-height: 240px;
+            width: auto;
+            height: auto;
         }
 
         .glow {
             box-shadow: 0 0 60px rgba(139, 92, 246, 0.15);
-        }
-
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
         }
 
         .fade-in {
@@ -310,6 +317,42 @@
             background: rgba(139, 92, 246, 0.4);
             transform: translateY(-2px);
         }
+
+        .stat-card {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #8b5cf6;
+            display: block;
+        }
+
+        .industry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .industry-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .industry-card:hover {
+            background: rgba(139, 92, 246, 0.1);
+            border-color: rgba(139, 92, 246, 0.3);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body class="text-white min-h-screen flex flex-col">
@@ -360,6 +403,8 @@
                 <div class="mt-6 flex flex-wrap justify-center gap-2">
                     <span class="keyword-tag">#FreeQRCodes</span>
                     <span class="keyword-tag">#CustomQR</span>
+                    <span class="keyword-tag">#HighResolution</span>
+                    <span class="keyword-tag">#DigitalMarketing</span>
                 </div>
             </header>
 
@@ -778,8 +823,8 @@
 
                         <div class="flex flex-col items-center">
                             <!-- QR Code Display -->
-                            <div class="qr-container mb-6 floating" id="qr-wrapper">
-                                <div id="qrcode" class="flex items-center justify-center" style="min-width: 200px; min-height: 200px;">
+                            <div class="qr-container mb-6" id="qr-wrapper">
+                                <div id="qrcode" class="flex items-center justify-center">
                                     <div class="text-center text-gray-400">
                                         <svg class="w-16 h-16 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
@@ -792,13 +837,14 @@
                             <!-- QR Options -->
                             <div class="w-full space-y-4">
                                 <div>
-                                    <label class="block text-sm text-gray-400 mb-2" for="qr-size">QR Code Size</label>
-                                    <input type="range" id="qr-size" min="150" max="350" value="200" class="w-full accent-violet-500" onchange="updateQRSize()" aria-label="Adjust QR code size">
+                                    <label class="block text-sm text-gray-400 mb-2" for="qr-size">Download Size (with padding)</label>
+                                    <input type="range" id="qr-size" min="512" max="2048" value="1024" step="256" class="w-full accent-violet-500" onchange="updateQRSize()" aria-label="Adjust QR code download size">
                                     <div class="flex justify-between text-xs text-gray-500 mt-1">
-                                        <span>Small</span>
-                                        <span id="size-value">200px</span>
-                                        <span>Large</span>
+                                        <span>512px</span>
+                                        <span id="size-value" class="text-violet-400 font-medium">1024px</span>
+                                        <span>2048px</span>
                                     </div>
+                                    <p class="text-xs text-gray-500 mt-1 text-center">Final image will include padding around QR code</p>
                                 </div>
 
                                 <div class="grid grid-cols-2 gap-3">
@@ -846,41 +892,131 @@
                 </div>
             </div>
 
+            <!-- Statistics Section -->
+            <section class="glass rounded-2xl p-8 mt-12 mb-12 fade-in">
+                <h2 class="text-2xl font-bold mb-6 gradient-text text-center">QR Code Statistics 2026</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="stat-card">
+                        <span class="stat-number">2.2B</span>
+                        <p class="text-sm text-gray-400 mt-2">People using QR payments globally by 2025</p>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">323%</span>
+                        <p class="text-sm text-gray-400 mt-2">QR code usage surge from 2021-2024</p>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">75%</span>
+                        <p class="text-sm text-gray-400 mt-2">Restaurants using QR codes worldwide</p>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">$38.2B</span>
+                        <p class="text-sm text-gray-400 mt-2">Projected QR payment market by 2030</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Industry Applications -->
+            <section class="glass rounded-2xl p-8 mt-12 mb-12 fade-in">
+                <h2 class="text-2xl font-bold mb-6 gradient-text">Industry-Specific QR Code Solutions</h2>
+                <div class="industry-grid">
+                    <div class="industry-card">
+                        <h3 class="text-violet-400 font-semibold mb-2">🏪 Retail & eCommerce</h3>
+                        <p class="text-sm text-gray-400">46% of retail marketing incorporates QR codes on packaging. Link to product videos, reviews, and exclusive discounts.</p>
+                    </div>
+                    <div class="industry-card">
+                        <h3 class="text-violet-400 font-semibold mb-2">🍽️ Restaurants & Hospitality</h3>
+                        <p class="text-sm text-gray-400">75% of restaurants use QR codes for digital menus. Increase table turnover by 40% with contactless ordering.</p>
+                    </div>
+                    <div class="industry-card">
+                        <h3 class="text-violet-400 font-semibold mb-2">🏥 Healthcare</h3>
+                        <p class="text-sm text-gray-400">Patient wristbands, prescription tracking, and vaccine verification. Reduce medical errors with digital records.</p>
+                    </div>
+                    <div class="industry-card">
+                        <h3 class="text-violet-400 font-semibold mb-2">🏢 Real Estate</h3>
+                        <p class="text-sm text-gray-400">Virtual property tours, instant contact saving, and document access. Streamline property showings.</p>
+                    </div>
+                    <div class="industry-card">
+                        <h3 class="text-violet-400 font-semibold mb-2">🎫 Events & Ticketing</h3>
+                        <p class="text-sm text-gray-400">Contactless check-ins, digital tickets, and lead capture. 43% of marketers use QR codes at events.</p>
+                    </div>
+                    <div class="industry-card">
+                        <h3 class="text-violet-400 font-semibold mb-2">🚚 Logistics & Inventory</h3>
+                        <p class="text-sm text-gray-400">43% of businesses use QR codes for logistics tracking. Asset management and supply chain optimization.</p>
+                    </div>
+                </div>
+            </section>
+
             <!-- SEO Article Section -->
             <article class="glass rounded-2xl p-8 mt-12 fade-in" itemscope itemtype="https://schema.org/Article">
                 <meta itemprop="author" content="Rakib Alom">
-                <meta itemprop="datePublished" content="2026-02-05">
-                <meta itemprop="dateModified" content="2026-02-05">
+                <meta itemprop="datePublished" content="2026-02-06">
+                <meta itemprop="dateModified" content="2026-02-06">
                 <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
                     <meta itemprop="name" content="Rakib Alom Tools">
                     <meta itemprop="url" content="https://rakibalom.com">
                 </div>
                 
                 <div class="article-content">
-                    <h2 itemprop="headline">The Ultimate Guide to QR Code Generation: Free Tools for Business & Personal Use</h2>
+                    <h2 itemprop="headline">The Ultimate Guide to QR Code Generation: Free Tools for Business & Personal Use in 2026</h2>
                     
                     <p itemprop="description">
-                        In today's digital landscape, <strong>QR code generators</strong> have become essential tools for businesses, marketers, and individuals looking to bridge the gap between physical and digital worlds. Our <em>free online QR code maker</em> provides a comprehensive solution for creating custom, scannable codes in seconds.
+                        In today's digital landscape, <strong>QR code generators</strong> have become essential tools for businesses, marketers, and individuals looking to bridge the gap between physical and digital worlds. Our <em>free online QR code maker</em> provides a comprehensive solution for creating custom, scannable codes in seconds. With <strong>2.2 billion people</strong> expected to use QR codes for payments globally by 2025, understanding how to leverage this technology is crucial for modern marketing success.
                     </p>
 
                     <h3>What Are QR Codes and How Do They Work?</h3>
                     <p>
-                        Quick Response (QR) codes are two-dimensional barcodes that store information readable by smartphone cameras. Unlike traditional barcodes, QR codes can hold significantly more data—including <strong>URLs, contact information, WiFi credentials, and payment details</strong>. When scanned using a QR code scanner or native camera app, these codes instantly direct users to digital content without manual typing.
+                        Quick Response (QR) codes are two-dimensional barcodes that store information readable by smartphone cameras. Unlike traditional barcodes, QR codes can hold significantly more data—including <strong>URLs, contact information, WiFi credentials, and payment details</strong>. When scanned using a QR code scanner or native camera app, these codes instantly direct users to digital content without manual typing. The technology has seen a <strong>323% surge in usage between 2021 and 2024</strong>, making it one of the fastest-growing digital tools.
                     </p>
 
                     <h3>Types of QR Codes You Can Create</h3>
                     <p>
-                        Our versatile <strong>QR code creator</strong> supports multiple formats tailored to specific needs:
+                        Our versatile <strong>QR code creator</strong> supports multiple formats tailored to specific needs. According to recent data, website QR codes account for 50% of all business QR codes, followed by file downloads (7%), menu QR codes (6%), and digital business cards (5%):
                     </p>
                     <ul>
-                        <li><strong>URL QR Codes:</strong> Drive traffic to websites, landing pages, or promotional offers</li>
-                        <li><strong>WiFi QR Codes:</strong> Share network credentials securely with guests or customers</li>
-                        <li><strong>vCard QR Codes:</strong> Digital business cards that save contact details instantly</li>
-                        <li><strong>Email & SMS QR Codes:</strong> Pre-fill messages for streamlined communication</li>
-                        <li><strong>Payment QR Codes:</strong> Accept payments via UPI, PayPal, Bitcoin, or Ethereum</li>
-                        <li><strong>Social Media QR Codes:</strong> Grow your following across platforms</li>
-                        <li><strong>Location QR Codes:</strong> Share GPS coordinates or addresses for events</li>
+                        <li><strong>URL QR Codes:</strong> Drive traffic to websites, landing pages, or promotional offers. The most popular type representing 28% of all QR codes created globally.</li>
+                        <li><strong>WiFi QR Codes:</strong> Share network credentials securely with guests or customers. Eliminate password sharing frustrations.</li>
+                        <li><strong>vCard QR Codes:</strong> Digital business cards that save contact details instantly. Replace traditional paper cards at networking events.</li>
+                        <li><strong>Email & SMS QR Codes:</strong> Pre-fill messages for streamlined communication and customer support.</li>
+                        <li><strong>Payment QR Codes:</strong> Accept payments via UPI, PayPal, Bitcoin, or Ethereum. The global QR code payment market is projected to reach <strong>$38.2 billion by 2030</strong>.</li>
+                        <li><strong>Social Media QR Codes:</strong> Grow your following across platforms including Instagram, TikTok, LinkedIn, and Twitter/X.</li>
+                        <li><strong>Location QR Codes:</strong> Share GPS coordinates or addresses for events, stores, and restaurants.</li>
+                        <li><strong>Dynamic QR Codes:</strong> Update content without reprinting. 79% of businesses have adopted dynamic QR codes for analytics and flexibility.</li>
                     </ul>
+
+                    <h3>QR Code Statistics & Market Growth 2026</h3>
+                    <p>
+                        The <strong>global QR code market</strong> was valued at approximately $1.5 billion in 2023 and is projected to reach $3.5 billion by 2033, registering an impressive CAGR of 8.7%. Key statistics include:
+                    </p>
+                    <ul>
+                        <li><strong>84%</strong> of mobile users worldwide have scanned a QR code at least once</li>
+                        <li><strong>44.6%</strong> of global internet users scan at least one QR code monthly</li>
+                        <li><strong>99.5 million</strong> US smartphone users projected to scan QR codes in 2025</li>
+                        <li><strong>$15.95 billion</strong> current value of the QR code payment market</li>
+                        <li><strong>93%</strong> of marketers increased QR code usage in the past year</li>
+                        <li><strong>88%</strong> report positive consumer sentiment toward QR codes</li>
+                    </ul>
+
+                    <h3>Industry-Specific QR Code Applications</h3>
+                    
+                    <h4>Restaurants & Hospitality (75% adoption rate)</h4>
+                    <p>
+                        Three-quarters of restaurants worldwide use QR codes for digital menus, ordering, and payments. This technology has been a lifeline for the industry, with 78% of diners preferring QR codes for convenience. Restaurants report faster table turnover and higher engagement, especially with younger demographics. <strong>Digital menu QR codes</strong> also increase spending by 20% compared to traditional ordering methods.
+                    </p>
+
+                    <h4>Retail & eCommerce (46% marketing incorporation)</h4>
+                    <p>
+                        Nearly half of retail marketing now includes QR codes on packaging and displays. Brands use them to link product packaging to how-to videos, reviews, 360° views, and exclusive discounts. Major retailers like Walmart, Nike, and IKEA leverage QR codes for mobile checkout and product information, creating interactive shopping experiences that boost conversion rates.
+                    </p>
+
+                    <h4>Healthcare & Pharmaceuticals</h4>
+                    <p>
+                        Hospitals and clinics use QR codes for patient wristbands, admission instructions, prescription tracking, and vaccine verification. Lab samples tagged with QR codes reduce mislabeling errors. This high-impact use case improves safety, streamlines workflows, and enhances patient satisfaction through instant access to medical information.
+                    </p>
+
+                    <h4>Marketing & Advertising (37% penetration)</h4>
+                    <p>
+                        QR codes transform print advertising into measurable digital channels. 47% of marketers use QR codes in email campaigns, 46% on product packaging, and 43% at events. The ability to track scans, update destinations, and A/B test campaigns makes QR codes essential for modern <strong>omnichannel marketing strategies</strong>.
+                    </p>
 
                     <h3>Benefits of Using Our Free QR Code Generator</h3>
                     <p>
@@ -888,23 +1024,41 @@
                     </p>
                     <ul>
                         <li><strong>No Registration Required:</strong> Create unlimited codes instantly without signing up</li>
-                        <li><strong>High-Resolution Output:</strong> Download print-quality PNG and SVG formats</li>
-                        <li><strong>Customizable Design:</strong> Adjust colors to match your brand identity</li>
+                        <li><strong>High-Resolution Output:</strong> Download print-quality PNG (up to 2048px) and scalable SVG formats</li>
+                        <li><strong>Customizable Design:</strong> Adjust colors to match your brand identity with full RGB control</li>
                         <li><strong>Mobile-Optimized:</strong> Responsive design works perfectly on all devices</li>
                         <li><strong>Privacy-Focused:</strong> Generated client-side; your data never leaves your device</li>
+                        <li><strong>Multiple Formats:</strong> Support for 13+ QR code types including dynamic and payment codes</li>
+                        <li><strong>Padding & Professional Layout:</strong> Downloads include clean padding for professional use</li>
                     </ul>
 
-                    <h3>Best Practices for QR Code Implementation</h3>
+                    <h3>Static vs. Dynamic QR Codes: Strategic Choice</h3>
                     <p>
-                        To maximize the effectiveness of your <strong>custom QR codes</strong>, follow these expert recommendations:
+                        <strong>Static QR codes</strong> contain fixed information that cannot be changed after creation—ideal for permanent details like WiFi passwords or contact information. These never expire and work indefinitely. <strong>Dynamic QR codes</strong> allow you to update the destination URL without reprinting, perfect for marketing campaigns requiring analytics, A/B testing, and content flexibility. With 79% of businesses now using dynamic codes, they represent the future of QR marketing.
+                    </p>
+
+                    <h3>QR Code Security & Best Practices 2026</h3>
+                    <p>
+                        As QR codes become ubiquitous, <strong>QR phishing (quishing)</strong> has emerged as a security concern. To ensure safe usage:
                     </p>
                     <ul>
-                        <li>Ensure sufficient contrast between the code and background</li>
-                        <li>Maintain a minimum size of 2x2 cm for print materials</li>
-                        <li>Always test scan functionality before mass distribution</li>
-                        <li>Include a call-to-action (CTA) telling users what to expect</li>
-                        <li>Use dynamic QR codes for campaigns requiring analytics or updates</li>
+                        <li>Use branded domains to build trust and prevent malicious redirects</li>
+                        <li>Implement dynamic QR codes with secure redirect services</li>
+                        <li>Regularly audit QR destinations for broken or compromised links</li>
+                        <li>Include clear call-to-action text explaining scan destination</li>
+                        <li>Test designs before mass printing to ensure scannability</li>
+                        <li>Maintain sufficient contrast between code and background</li>
                     </ul>
+
+                    <h3>Sustainability & Eco-Friendly QR Solutions</h3>
+                    <p>
+                        QR codes support environmental sustainability by reducing paper waste. British Airways eliminated boarding passes using QR codes, and digital receipts via QR technology save millions of paper receipts annually. For eco-conscious brands, QR codes offer a <strong>sustainable alternative</strong> to printed materials while providing richer digital content.
+                    </p>
+
+                    <h3>Future of QR Code Technology</h3>
+                    <p>
+                        Looking ahead, QR codes are integrating with <strong>augmented reality (AR), artificial intelligence, and IoT devices</strong>. Brands like L'Oréal use AR-powered QR codes for virtual try-ons. Mastercard employs dynamic QR codes for secure contactless payments. As the technology evolves, QR codes are becoming persistent identifiers for smart packaging, connected products, and immersive customer experiences.
+                    </p>
 
                     <h3>SEO Keywords & Search Terms</h3>
                     <div class="flex flex-wrap gap-2 mt-4 mb-6">
@@ -920,26 +1074,19 @@
                         <span class="keyword-tag">digital business card qr</span>
                         <span class="keyword-tag">qr code scanner online</span>
                         <span class="keyword-tag">create qr code free</span>
+                        <span class="keyword-tag">high resolution qr code</span>
+                        <span class="keyword-tag">qr code marketing 2026</span>
+                        <span class="keyword-tag">qr code statistics</span>
+                        <span class="keyword-tag">qr code payment gateway</span>
+                        <span class="keyword-tag">qr code menu restaurant</span>
+                        <span class="keyword-tag">qr code inventory management</span>
+                        <span class="keyword-tag">qr code event ticketing</span>
+                        <span class="keyword-tag">qr code print ready</span>
                     </div>
-
-                    <h3>Common Use Cases for QR Codes</h3>
-                    <p>
-                        <strong>Restaurants and Cafes:</strong> Digital menus accessible via table-top QR codes.<br>
-                        <strong>Real Estate:</strong> Property listing details for potential buyers.<br>
-                        <strong>Events & Conferences:</strong> Contactless check-ins and digital tickets.<br>
-                        <strong>Retail & E-commerce:</strong> Product information and discount codes.<br>
-                        <strong>Healthcare:</strong> Patient information and appointment scheduling.<br>
-                        <strong>Education:</strong> Resource links and assignment submissions.
-                    </p>
-
-                    <h3>Static vs. Dynamic QR Codes: Which to Choose?</h3>
-                    <p>
-                        <strong>Static QR codes</strong> contain fixed information that cannot be changed after creation—ideal for permanent details like WiFi passwords or contact information. <strong>Dynamic QR codes</strong> allow you to update the destination URL without reprinting, perfect for marketing campaigns where tracking and flexibility are crucial.
-                    </p>
 
                     <h3>Get Started with Free QR Code Generation</h3>
                     <p>
-                        Ready to create your first <strong>professional QR code</strong>? Simply select your desired type from the options above, enter your information, customize the appearance, and download your high-resolution code. Whether you need a <em>QR code for URL</em> sharing, <em>contactless payment</em> processing, or <em>digital marketing</em> campaigns, our tool delivers exceptional results every time.
+                        Ready to create your first <strong>professional QR code</strong>? Simply select your desired type from the options above, enter your information, customize the appearance, and download your high-resolution code. Whether you need a <em>QR code for URL</em> sharing, <em>contactless payment</em> processing, or <em>digital marketing</em> campaigns, our tool delivers exceptional results every time. Join millions of businesses leveraging QR code technology to connect physical and digital experiences seamlessly.
                     </p>
                 </div>
             </article>
@@ -985,7 +1132,7 @@
                             <span class="transform group-open:rotate-180 transition-transform">▼</span>
                         </summary>
                         <p class="mt-3 text-gray-400">
-                            We offer downloads in both PNG and SVG formats. PNG is perfect for digital use and small print materials, while SVG provides infinite scalability for large-format printing like banners and billboards without quality loss.
+                            We offer downloads in both PNG and SVG formats. PNG is perfect for digital use and small print materials, while SVG provides infinite scalability for large-format printing like banners and billboards without quality loss. You can choose sizes from 512px up to 2048px.
                         </p>
                     </details>
                 </div>
@@ -1208,16 +1355,16 @@
             }
 
             const qrContainer = document.getElementById('qrcode');
-            const size = parseInt(document.getElementById('qr-size').value);
             const fgColor = document.getElementById('qr-fg-color').value;
             const bgColor = document.getElementById('qr-bg-color').value;
 
             qrContainer.innerHTML = '';
 
+            // Preview always generates at fixed size for display
             qrcode = new QRCode(qrContainer, {
                 text: qrData,
-                width: size,
-                height: size,
+                width: 240,
+                height: 240,
                 colorDark: fgColor,
                 colorLight: bgColor,
                 correctLevel: QRCode.CorrectLevel.H
@@ -1229,7 +1376,7 @@
         function updateQRSize() {
             const size = document.getElementById('qr-size').value;
             document.getElementById('size-value').textContent = `${size}px`;
-            if (qrData) generateQR();
+            // No need to regenerate preview - slider only affects download size
         }
 
         // Color input change handlers
@@ -1244,64 +1391,154 @@
         });
 
         function downloadQR(format) {
-            const qrCanvas = document.querySelector('#qrcode canvas');
-            if (!qrCanvas) {
+            if (!qrData) {
                 showToast('Please generate a QR code first');
                 return;
             }
 
+            const fgColor = document.getElementById('qr-fg-color').value;
+            const bgColor = document.getElementById('qr-bg-color').value;
+            
+            // Get download size from slider
+            const qrSize = parseInt(document.getElementById('qr-size').value);
+            const padding = Math.floor(qrSize * 0.12); // 12% padding
+            const finalSize = qrSize + (padding * 2);
+
             if (format === 'png') {
-                const link = document.createElement('a');
-                link.download = 'qrcode.png';
-                link.href = qrCanvas.toDataURL('image/png');
-                link.click();
-                showToast('PNG downloaded!');
+                // Create a temporary QR code at download size
+                const tempDiv = document.createElement('div');
+                const tempQR = new QRCode(tempDiv, {
+                    text: qrData,
+                    width: qrSize,
+                    height: qrSize,
+                    colorDark: fgColor,
+                    colorLight: bgColor,
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+
+                setTimeout(() => {
+                    const qrCanvas = tempDiv.querySelector('canvas');
+                    if (!qrCanvas) {
+                        showToast('Error generating QR');
+                        return;
+                    }
+
+                    // Create final canvas with padding
+                    const finalCanvas = document.createElement('canvas');
+                    finalCanvas.width = finalSize;
+                    finalCanvas.height = finalSize;
+                    const ctx = finalCanvas.getContext('2d');
+
+                    // Fill background color
+                    ctx.fillStyle = bgColor;
+                    ctx.fillRect(0, 0, finalSize, finalSize);
+
+                    // Draw QR code in center with padding
+                    ctx.drawImage(qrCanvas, padding, padding, qrSize, qrSize);
+
+                    // Download
+                    const link = document.createElement('a');
+                    link.download = `qrcode_${qrSize}px.png`;
+                    link.href = finalCanvas.toDataURL('image/png');
+                    link.click();
+                    showToast(`${finalSize}x${finalSize} PNG downloaded!`);
+                }, 100);
+                
             } else if (format === 'svg') {
-                const size = qrCanvas.width;
-                const ctx = qrCanvas.getContext('2d');
-                const imageData = ctx.getImageData(0, 0, size, size);
-                
-                let svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">`;
-                svgContent += `<rect width="${size}" height="${size}" fill="${document.getElementById('qr-bg-color').value}"/>`;
-                
-                const moduleSize = size / 25;
-                const fgColor = document.getElementById('qr-fg-color').value;
-                
-                for (let y = 0; y < size; y += moduleSize) {
-                    for (let x = 0; x < size; x += moduleSize) {
-                        const pixelIndex = (Math.floor(y) * size + Math.floor(x)) * 4;
-                        if (imageData.data[pixelIndex] < 128) {
-                            svgContent += `<rect x="${x}" y="${y}" width="${moduleSize}" height="${moduleSize}" fill="${fgColor}"/>`;
+                const tempDiv = document.createElement('div');
+                const tempQR = new QRCode(tempDiv, {
+                    text: qrData,
+                    width: qrSize,
+                    height: qrSize,
+                    colorDark: fgColor,
+                    colorLight: bgColor,
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+
+                setTimeout(() => {
+                    const qrCanvas = tempDiv.querySelector('canvas');
+                    if (!qrCanvas) {
+                        showToast('Error generating QR');
+                        return;
+                    }
+
+                    const ctx = qrCanvas.getContext('2d');
+                    const imageData = ctx.getImageData(0, 0, qrSize, qrSize);
+                    
+                    const moduleSize = qrSize / 25;
+                    
+                    let svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="${finalSize}" height="${finalSize}" viewBox="0 0 ${finalSize} ${finalSize}">`;
+                    svgContent += `<rect width="${finalSize}" height="${finalSize}" fill="${bgColor}"/>`;
+                    
+                    for (let y = 0; y < qrSize; y += moduleSize) {
+                        for (let x = 0; x < qrSize; x += moduleSize) {
+                            const pixelIndex = (Math.floor(y) * qrSize + Math.floor(x)) * 4;
+                            if (imageData.data[pixelIndex] < 128) {
+                                svgContent += `<rect x="${x + padding}" y="${y + padding}" width="${moduleSize}" height="${moduleSize}" fill="${fgColor}"/>`;
+                            }
                         }
                     }
-                }
-                
-                svgContent += '</svg>';
-                
-                const blob = new Blob([svgContent], { type: 'image/svg+xml' });
-                const link = document.createElement('a');
-                link.download = 'qrcode.svg';
-                link.href = URL.createObjectURL(blob);
-                link.click();
-                showToast('SVG downloaded!');
+                    
+                    svgContent += '</svg>';
+                    
+                    const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+                    const link = document.createElement('a');
+                    link.download = `qrcode_${qrSize}px.svg`;
+                    link.href = URL.createObjectURL(blob);
+                    link.click();
+                    showToast(`${finalSize}x${finalSize} SVG downloaded!`);
+                }, 100);
             }
         }
 
         function copyQRToClipboard() {
-            const qrCanvas = document.querySelector('#qrcode canvas');
-            if (!qrCanvas) {
+            if (!qrData) {
                 showToast('Please generate a QR code first');
                 return;
             }
 
-            qrCanvas.toBlob(function(blob) {
-                const item = new ClipboardItem({ 'image/png': blob });
-                navigator.clipboard.write([item]).then(function() {
-                    showToast('QR Code copied to clipboard!');
-                }).catch(function() {
-                    showToast('Failed to copy. Try downloading instead.');
-                });
+            const fgColor = document.getElementById('qr-fg-color').value;
+            const bgColor = document.getElementById('qr-bg-color').value;
+            
+            const qrSize = parseInt(document.getElementById('qr-size').value);
+            const padding = Math.floor(qrSize * 0.12);
+            const finalSize = qrSize + (padding * 2);
+            
+            const tempDiv = document.createElement('div');
+            const tempQR = new QRCode(tempDiv, {
+                text: qrData,
+                width: qrSize,
+                height: qrSize,
+                colorDark: fgColor,
+                colorLight: bgColor,
+                correctLevel: QRCode.CorrectLevel.H
             });
+
+            setTimeout(() => {
+                const qrCanvas = tempDiv.querySelector('canvas');
+                if (!qrCanvas) {
+                    showToast('Error copying QR');
+                    return;
+                }
+
+                const finalCanvas = document.createElement('canvas');
+                finalCanvas.width = finalSize;
+                finalCanvas.height = finalSize;
+                const ctx = finalCanvas.getContext('2d');
+
+                ctx.fillStyle = bgColor;
+                ctx.fillRect(0, 0, finalSize, finalSize);
+                ctx.drawImage(qrCanvas, padding, padding, qrSize, qrSize);
+
+                finalCanvas.toBlob(function(blob) {
+                    const item = new ClipboardItem({ 'image/png': blob });
+                    navigator.clipboard.write([item]).then(function() {
+                        showToast(`QR Code (${finalSize}x${finalSize}) copied!`);
+                    }).catch(function() {
+                        showToast('Failed to copy. Try downloading instead.');
+                    });
+                });
+            }, 100);
         }
 
         function showToast(message) {
